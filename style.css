@@ -1,0 +1,241 @@
+:root {
+  --bg: #00d24a;
+  --item-width: 280px;
+  --card-size: 320px;
+  --dropzone-width: 280px;
+  --dropzone-height: 80px;
+  --gap-board: 48px;
+  --font-size-base: 24px;
+  --font-size-timer: 56px;
+}
+
+/* สำหรับจอ 4K */
+@media (min-width: 2560px) {
+  :root {
+    --item-width: 380px;
+    --card-size: 420px;
+    --dropzone-width: 360px;
+    --dropzone-height: 100px;
+    --gap-board: 64px;
+    --font-size-base: 32px;
+    --font-size-timer: 72px;
+  }
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  background-image: url('bg.png');
+  background-size: cover;
+  background-position: center;
+  font-size: var(--font-size-base);
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  padding: 100px 40px 400px 40px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* คอลัมน์ซ้าย - ไอเทมสีเหลือง - ตรึงไว้ล่างสุด */
+.palette {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+  justify-content: center;
+  z-index: 100;
+}
+
+.item {
+  background: #ffd43b;
+  padding: 20px 28px;
+  border-radius: 32px;
+  cursor: grab;
+  user-select: none;
+  border: 4px solid #ffd43b;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.1);
+  width: var(--item-width);
+  text-align: center;
+  font-weight: 700;
+  font-size: var(--font-size-base);
+  transition: transform 0.2s;
+}
+
+.item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.12);
+}
+
+.item:active {
+  cursor: grabbing;
+}
+
+.item.dragging {
+  opacity: 0.6;
+  transform: scale(1.05);
+}
+
+/* บอร์ดการ์ดสีแดง */
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap-board);
+  padding: 20px 60px 60px 60px;
+  align-content: start;
+  margin-bottom: 40px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 36px;
+  padding: 24px;
+  height: var(--card-size);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+  width: 180px;
+  height: 150px;
+  object-fit: contain;
+  margin-top: 10px;
+}
+
+/* โซนวาง (สี่เหลี่ยมสีดำ) */
+.dropzone {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 24px;
+  width: var(--dropzone-width);
+  height: var(--dropzone-height);
+  border-radius: 32px;
+  border: 5px solid #000;
+  background: rgba(255, 255, 255, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.dropzone.hover {
+  outline: 8px solid rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dropzone.correct {
+  background: rgba(0, 230, 100, 0.15);
+  border-color: #008000;
+}
+
+/* ตัวจับเวลาและข้อมูล - ตรึงไว้ด้านบน */
+.hud {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 20px;
+  font-size: var(--font-size-timer);
+  font-weight: 700;
+  color: #000;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 16px 32px;
+  border-radius: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 200;
+}
+
+/* ข้อความที่วางในโซน */
+.placed {
+  pointer-events: none;
+  font-weight: 700;
+  font-size: var(--font-size-base);
+  color: #000;
+}
+
+/* Responsive สำหรับจอเล็ก */
+@media (max-width: 1600px) {
+  :root {
+    --item-width: 220px;
+    --card-size: 260px;
+    --dropzone-width: 220px;
+    --dropzone-height: 70px;
+    --gap-board: 36px;
+    --font-size-base: 20px;
+    --font-size-timer: 48px;
+  }
+  
+  .wrap {
+    padding: 90px 40px 180px 40px;
+  }
+  
+  .board {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 20px 40px 50px 40px;
+  }
+  
+  .card img {
+    width: 140px;
+    height: 120px;
+  }
+  
+  .palette {
+    gap: 16px;
+    padding: 20px;
+  }
+  
+  .hud {
+    top: 16px;
+    padding: 12px 28px;
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --item-width: 180px;
+    --card-size: 220px;
+    --dropzone-width: 180px;
+    --dropzone-height: 60px;
+    --gap-board: 24px;
+    --font-size-base: 16px;
+    --font-size-timer: 36px;
+  }
+  
+  .wrap {
+    padding: 80px 20px 160px 20px;
+  }
+  
+  .palette {
+    gap: 12px;
+    padding: 16px;
+  }
+  
+  .board {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 10px 20px 40px 20px;
+  }
+  
+  .card img {
+    width: 110px;
+    height: 90px;
+  }
+  
+  .hud {
+    top: 12px;
+    padding: 10px 20px;
+  }
+}

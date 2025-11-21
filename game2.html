@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เกมทายชื่อผัก</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <div class="container">
+        <h1></h1>
+        <div class="instruction"></div>
+        
+        <div class="game-area">
+            <div class="red-box">
+                <img id="vegImage" src="" alt="Vegetable">
+            </div>
+
+            <div class="right-section">
+                <div class="yellow-box">
+                    <div class="hint-text" id="hintText"></div>
+                    
+                    <div class="answer-box" id="answerBox">
+                        <div class="drop-zone" id="dropZone">
+                            <span style="color: white; font-size: 12px;">Drag it here.</span>
+                        </div>
+                        <div class="answer-input-section">
+                            <input type="text" class="answer-input" id="answerInput" placeholder="Type the name of the vegetable here....">
+                            <button class="submit-btn" id="submitBtn" onclick="checkAnswer()">Send answer</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-bar">
+                    <div class="timer"> time: <span id="timeLeft">60</span> second</div>
+                    <div class="score"> score: <span id="score">0</span></div>
+                </div>
+
+                <div class="feedback" id="feedback"></div>
+            </div>
+        </div>
+
+        <div class="options-grid" id="optionsGrid"></div>
+    </div>
+
+    <div class="modal" id="gameOverModal">
+        <div class="modal-content">
+            <h2> out of time!</h2>
+            <p>your score: <span class="final-score" id="finalScore">0</span></p>
+            <button class="restart-btn" onclick="resetGame()">play again</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
